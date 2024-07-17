@@ -28,8 +28,9 @@ class ViewController: UIViewController {
     
     private func startAdvertise() {
         // アドバタイズメントデータを作成する
-        let advertisementData = [CBAdvertisementDataLocalNameKey: "Test Device"]
-        
+        let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
+        let advertisementData = [CBAdvertisementDataServiceUUIDsKey: [serviceUUID]]
+
         // アドバタイズ開始
         peripheralManager.startAdvertising(advertisementData)
         
