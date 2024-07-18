@@ -106,7 +106,7 @@ extension ViewController: CBPeripheralManagerDelegate {
 extension CBUUID {
     static let userID = CBUUID(string: "87553620-AC3C-424C-986E-E70FB8BB5C84")
     static let discoveryToken = CBUUID(string: "87553621-AC3C-424C-986E-E70FB8BB5C84")
-    static let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
+    static let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBBB")
 }
 
 extension CBMutableService {

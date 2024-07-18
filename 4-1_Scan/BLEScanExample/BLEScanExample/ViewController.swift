@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             isScanning = true
             sender.setTitle("STOP SCAN", for: .normal)
 
-            let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
+            let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBBB")
             centralManager.scanForPeripherals(withServices: [serviceUUID])
         } else {
             centralManager.stopScan()
