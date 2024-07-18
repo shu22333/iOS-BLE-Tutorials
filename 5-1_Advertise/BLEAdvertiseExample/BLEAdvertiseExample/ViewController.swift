@@ -13,7 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet var advertiseBtn: UIButton!
     private var peripheralManager: CBPeripheralManager!
-    
+    private var currentService: CBMutableService?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
     
     private func startAdvertise() {
         // アドバタイズメントデータを作成する
-        let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
+        let serviceUUID = CBUUID.serviceUUID
         let advertisementData = [CBAdvertisementDataServiceUUIDsKey: [serviceUUID]]
 
         // アドバタイズ開始
@@ -63,13 +64,22 @@ extension ViewController: CBPeripheralManagerDelegate {
         
         switch peripheral.state {
         case .poweredOn:
-            // アドバタイズ開始
-            startAdvertise()
+            publishService()
         default:
             break
         }
     }
-    
+
+    func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
+        print("\(self.classForCoder)/\(#function), service: \(service)")
+        if let error = error {
+            print(error)
+            return
+        }
+
+        startAdvertise()
+    }
+
     // アドバタイズ開始処理が完了すると呼ばれる
     func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
         if let error = error {
@@ -78,5 +88,31 @@ extension ViewController: CBPeripheralManagerDelegate {
         }
         print("アドバタイズ開始成功！")
     }
+
+    private func publishService() {
+        print("\(self.classForCoder)/\(#function)")
+        guard currentService == nil else {
+            print("Already service has been published.")
+            return
+        }
+        let userIDCharacteristic = CBMutableCharacteristic(type: CBUUID.userID, properties: [ .read], value: nil, permissions: [.readable] )
+//        let niCharacteristic = CBMutableCharacteristic(type: CBUUID.discoveryToken, properties: [ .read, .writeWithoutResponse], value: nil, permissions: [.readable, .writeable] )
+        let newService = CBMutableService(uuid: CBUUID.serviceUUID, characteristics: [userIDCharacteristic])
+        currentService = newService
+        peripheralManager.add(newService)
+    }
 }
 
+extension CBUUID {
+    static let userID = CBUUID(string: "87553620-AC3C-424C-986E-E70FB8BB5C84")
+    static let discoveryToken = CBUUID(string: "87553621-AC3C-424C-986E-E70FB8BB5C84")
+    static let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
+}
+
+extension CBMutableService {
+
+    convenience init(uuid: CBUUID, characteristics: [CBMutableCharacteristic]) {
+        self.init(type: uuid, primary: true)
+        self.characteristics = characteristics
+    }
+}
