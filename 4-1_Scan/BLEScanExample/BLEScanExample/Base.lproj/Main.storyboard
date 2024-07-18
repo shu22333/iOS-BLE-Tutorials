@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,13 +35,33 @@
                                     <action selector="scanButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="gGw-8N-I4Z"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-mG-gKr" customClass="BLECommonButton">
+                                <rect key="frame" x="76.666666666666686" y="512" width="240" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="DYe-4L-Ium"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="PVN-gQ-eTn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                <state key="normal" title="START ADVERTISE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="advertiseButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9be-TD-I3V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
+                            <constraint firstItem="0QT-mG-gKr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="1SD-0f-IU8"/>
+                            <constraint firstItem="0QT-mG-gKr" firstAttribute="top" secondItem="5i4-ki-J0q" secondAttribute="bottom" constant="64" id="Xwn-Yk-gF9"/>
                             <constraint firstAttribute="centerX" secondItem="5i4-ki-J0q" secondAttribute="centerX" id="oU8-5z-MLe"/>
                             <constraint firstAttribute="centerY" secondItem="5i4-ki-J0q" secondAttribute="centerY" id="pca-Df-9q7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="advertiseBtn" destination="0QT-mG-gKr" id="KKS-qR-pMW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
