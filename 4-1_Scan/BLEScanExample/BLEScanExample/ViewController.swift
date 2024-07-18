@@ -37,8 +37,7 @@ class ViewController: UIViewController {
             sender.setTitle("STOP SCAN", for: .normal)
 
             let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBB7")
-            let options: [String: Any] = [CBCentralManagerScanOptionAllowDuplicatesKey : NSNumber(value: true)]
-            centralManager.scanForPeripherals(withServices: [serviceUUID], options: options)
+            centralManager.scanForPeripherals(withServices: [serviceUUID])
         } else {
             centralManager.stopScan()
             
