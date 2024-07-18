@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 
 class ViewController: UIViewController {
+    @IBOutlet private var textView: UITextView!
 
     var isScanning = false
     var centralManager: CBCentralManager!
@@ -53,6 +54,12 @@ extension ViewController: CBCentralManagerDelegate {
                         rssi RSSI: NSNumber)
     {
         print("発見したBLEデバイス: \(peripheral)")
+        textView.text += """
+
+        --------------------
+        \(Date())
+        \(peripheral)
+        """
     }
 }
 
