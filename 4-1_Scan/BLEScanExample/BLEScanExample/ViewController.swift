@@ -29,8 +29,10 @@ class ViewController: UIViewController {
             isScanning = true
             sender.setTitle("STOP SCAN", for: .normal)
 
-            let serviceUUID = CBUUID(string: "B36F4066-2EF7-467E-832D-8CBFF563BBBB")
-            centralManager.scanForPeripherals(withServices: [serviceUUID])
+            let serviceUUID1 = CBUUID(string: "00000000-0000-0000-0000-000000000039")
+            let serviceUUID2 = CBUUID(string: "00000000-0000-0000-0000-000000000040")
+            let options: [String : Any] = [CBCentralManagerScanOptionAllowDuplicatesKey : NSNumber(value: true)]
+            centralManager.scanForPeripherals(withServices: [serviceUUID1, serviceUUID2], options: options)
         } else {
             centralManager.stopScan()
             
@@ -54,6 +56,7 @@ extension ViewController: CBCentralManagerDelegate {
                         rssi RSSI: NSNumber)
     {
         print("発見したBLEデバイス: \(peripheral)")
+        print("advertisementData: \(advertisementData)")
         textView.text += """
 
         --------------------
